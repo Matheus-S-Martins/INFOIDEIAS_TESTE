@@ -15,7 +15,66 @@ class Funcoes
 
      * */
     public function SeculoAno(int $ano): int {
+        $seculo = 0;
+
+        //Transforma o ano em uma string
+        $ano_txt = (string)$ano;
         
+        //Transforma a string em array
+        $arr_ano = str_split($ano_txt);
+
+        // calcula posiçoes do array
+        $number_array = count($arr_ano);
+
+        //Se o valor for menor que 2 sempre sera seculo 1
+        if($number_array <= 2){
+            $seculo = 1;
+        }
+
+        //Se o valor do aray for maior w 2 ele faz os calculos necessarios
+        if($number_array > 2){
+            $penultimo = $arr_ano[ count($arr_ano) - 1  ];
+            $ultimo = $arr_ano[ count($arr_ano) - 2  ];
+
+            //Se os dois ultimos tiverem o valor de 0 retorna o valor do primeiro 
+            if($ultimo == 0 && $penultimo == 0){
+                $primeiro = $arr_ano[0];
+
+                //tranforma string em int
+                $seculo = intval($primeiro);
+
+            }else{
+                $primeiro = $arr_ano[0];
+
+                //tranforma string em int
+                $seculo = intval($primeiro) + 1;
+            }
+        }
+
+         if($number_array > 3){
+
+            $penultimo = $arr_ano[ count($arr_ano) - 1  ];
+            $ultimo = $arr_ano[ count($arr_ano) - 2  ];
+
+            //Se os dois ultimos tiverem o valor de 0 retorna o valor do primeiro concatenado com o segundo
+            if($ultimo == 0 && $penultimo == 0){
+                $primeiro = $arr_ano[0];
+                $segundo = $arr_ano[1];
+
+                //tranforma string em int
+                $seculo = intval($primeiro . $segundo);
+
+            }else{
+                $primeiro = $arr_ano[0];
+                $segundo = $arr_ano[1];
+
+                //tranforma string em int
+                $seculo = intval($primeiro . $segundo) + 1;
+            }
+        }
+
+
+        return $seculo ;
     }
 
     
@@ -37,14 +96,43 @@ class Funcoes
 
      * */
     public function PrimoAnterior(int $numero): int {
+
+        $divisores = 0;
+        for($count=2; $count<$numero; $count++){
+
+            //Verifica se tem divisores
+            if($numero % $count == 0){
+                $divisores++;
+            }
+        }
+
+            if($divisores){
+                $resposta = false;
+            }else{
+                $resposta =  true;
+            }
         
+        while(!$resposta){
+            $numero = $numero - 1;
+            
+            $divisores = 0;
+        for($count=2; $count<$numero; $count++){
+
+            //Verifica se tem divisores
+            if($numero % $count == 0){
+                $divisores++;
+            }
+        }
+
+            if($divisores){
+                $resposta = false;
+            }else{
+                $resposta =  true;
+            }
+        }
+
+        return $numero;
     }
-
-
-
-
-
-
 
 
 
@@ -66,7 +154,25 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $resposta= '';
+
+        $valor = array();
+
+        foreach ($arr as $row)
+        {
+            foreach($row as $i )
+            {
+                
+                $valor[] .= $i ;
+            }
+
+        }        
+
+        sort($valor);
+
+        $resposta = $valor[ count($valor) -2];
+       
+        return $resposta;
     }
 	
 	
